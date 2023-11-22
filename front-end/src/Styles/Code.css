@@ -1,0 +1,21 @@
+.code-block-container {
+    margin-top: 20px;
+}
+
+.code-block {
+    background-color: black;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: larger;
+    /* Use a monospace font for code */
+    border: 1px solid white;
+    padding: 10px;
+
+}
+
+.code-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
