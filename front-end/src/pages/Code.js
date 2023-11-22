@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import '../Styles/Code.css';
+import { getCodeByTitle } from '../axios';
 const hljs = require('highlight.js/lib/core');
 
 // Load any languages you need
@@ -13,10 +14,16 @@ const Code = () => {
     const [socket, setSocket] = useState(null);
     const [isMentor, setIsMentor] = useState(false);
     const textareaRef = useRef(null);
-
+    const [codeData, setCodeData] = useState(null)
 
     useEffect(() => {
         hljs.highlightBlock(textareaRef.current);
+        const fetchData = async () => {
+            const data = await getCodeByTitle(id);
+            console.log(data);
+            setCodeData(data);
+        }
+        fetchData();
     }, []);
 
 
