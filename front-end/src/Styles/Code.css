@@ -5,9 +5,8 @@
 .code-block {
     background-color: black;
     color: white;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier;
     font-size: larger;
-    /* Use a monospace font for code */
     border: 1px solid white;
     padding: 10px;
 

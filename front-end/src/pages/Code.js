@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import '../Styles/Code.css';
+const hljs = require('highlight.js/lib/core');
+
+// Load any languages you need
+hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
 
 const Code = () => {
     const { id } = useParams();
     const [code, setCode] = useState('');
     const [socket, setSocket] = useState(null);
     const [isMentor, setIsMentor] = useState(false);
+    const textareaRef = useRef(null);
 
 
     useEffect(() => {
-        console.log('useEffect');
-        const newSocket = io('ws://localhost:8080');
+        hljs.highlightBlock(textareaRef.current);
+    }, []);
+
+
+    useEffect(() => {
+        const newSocket = io('https://moveo-server-z2xn.onrender.com');
         setSocket(newSocket);
 
         return () => {
@@ -25,13 +34,15 @@ const Code = () => {
             socket.emit('joinRoom', id);
 
             socket.on('codeChange', (newCode) => {
-                setCode(newCode);
+                if (isMentor) {
+                    setCode(newCode);
+                }
             });
             socket.on('mentorStatus', (status) => {
                 setIsMentor(status);
             });
         }
-    }, [id, socket]);
+    }, [id, socket, isMentor]);
 
     const handleCodeChange = (event) => {
         const newCode = event.target.value;
@@ -51,6 +62,7 @@ const Code = () => {
 
             <div className="code-block-container">
                 <textarea
+                    ref={textareaRef}
                     className="code-block"
                     placeholder="Write your code here..."
                     value={code}
