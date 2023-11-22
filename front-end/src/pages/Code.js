@@ -3,6 +3,11 @@ import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import '../Styles/Code.css';
 import { getCodeByTitle } from '../axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFaceSmile } from '@fortawesome/free-solid-svg-icons';
+
+
+
 const hljs = require('highlight.js/lib/core');
 
 // Load any languages you need
@@ -15,13 +20,13 @@ const Code = () => {
     const [isMentor, setIsMentor] = useState(false);
     const textareaRef = useRef(null);
     const [codeData, setCodeData] = useState(null)
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         hljs.highlightBlock(textareaRef.current);
         const fetchData = async () => {
             const data = await getCodeByTitle(id);
-            console.log(data);
-            setCodeData(data);
+            setCodeData(data[0]);
         }
         fetchData();
     }, []);
@@ -43,6 +48,7 @@ const Code = () => {
             socket.on('codeChange', (newCode) => {
                 if (isMentor) {
                     setCode(newCode);
+                    checkSuccess(newCode);
                 }
             });
             socket.on('mentorStatus', (status) => {
@@ -54,10 +60,23 @@ const Code = () => {
     const handleCodeChange = (event) => {
         const newCode = event.target.value;
         setCode(newCode);
-
+        checkSuccess(newCode);
         socket.emit('codeChange', { roomId: id, code: newCode });
     };
-    useEffect(() => { }, [isMentor])
+
+    const checkSuccess = (newCode) => {
+        console.log("code: ", newCode);
+        console.log('data: ', codeData.code);
+        if (newCode === codeData.code) {
+            setSuccess(true);
+        }
+        else {
+            setSuccess(false)
+        }
+    }
+    useEffect(() => {
+
+    }, [isMentor])
 
     return (
         <div className="code-div">
@@ -66,7 +85,6 @@ const Code = () => {
             }
             <h1>Code block details</h1>
             <p> {id}</p>
-
             <div className="code-block-container">
                 <textarea
                     ref={textareaRef}
@@ -79,6 +97,10 @@ const Code = () => {
                     readOnly={isMentor}
                 />
             </div>
+
+            {success &&
+                <FontAwesomeIcon icon={faFaceSmile} size='10x' color='yellow' />
+            }
         </div>
     );
 }
