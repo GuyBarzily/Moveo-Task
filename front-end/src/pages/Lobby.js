@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { getCodeTitles } from '../axios';
 
 const Lobby = () => {
-    const codeBlocks = [
-        { id: 1, name: 'Async case' },
-        { id: 2, name: 'Another case' },
-        { id: 3, name: 'Third case' },
-        { id: 4, name: 'Fourth case' },
-    ];
+    const [titles, setTitles] = useState([]);
+    useState(() => {
+        const fetchData = async () => {
+            const data = await getCodeTitles();
+            setTitles(data)
+        }
+        fetchData();
+    }, [])
     return (
         <div>
             <h1>Choose code block</h1>
             <ul>
-                {codeBlocks.map((block) => (
-                    <li key={block.id}>
-                        <Link to={`/code/${block.name}`}>{block.name}</Link>
+                {titles.map((block) => (
+                    <li key={block.title}>
+                        <Link to={`/code/${block.title}`}>{block.title}</Link>
                     </li>
                 ))}
             </ul>
