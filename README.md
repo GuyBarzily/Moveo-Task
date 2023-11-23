@@ -2,8 +2,17 @@ Hi, This is my home assignment for Moveo Group.
 
 code blocks solutions:
 
-1. Async Arrow Function : const as = async () =>{}
-2. Set Timeout : setTimeout(code, delay)
-3. Print 1 to 10 using for loop : for (let i = 1; i < 11; i++){console.log(i);}
-4. print 1 to 10 using while loop : 'let i = 1;
-   while (i<11){console.log(i);}'
+1. Sort Array : function sort(arr){
+   return arr.sort()
+}
+2. Rotate Array : function rotateArray(arr,k){
+  const rotateIndex = k % arr.length;
+  const rotatedArray = arr.slice(-rotateIndex).concat(arr.slice(0, -rotateIndex));
+  return rotatedArray;
+}
+3. Print Array : function printArray(arr){
+  console.log(arr);
+}
+4. Find if even : function isEven(num){
+  return num % 2 === 0;
+}
