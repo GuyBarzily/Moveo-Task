@@ -9,8 +9,16 @@
     font-size: larger;
     border: 1px solid white;
     padding: 10px;
-
 }
+
+.code-block.read-only {
+    opacity: 0.8;
+    /* Adjust the opacity value (0.0 to 1.0) */
+    /* You can customize this opacity value to suit your design */
+}
+
+
+
 
 .code-div {
     display: flex;

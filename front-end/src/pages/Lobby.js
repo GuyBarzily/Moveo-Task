@@ -1,18 +1,22 @@
-import React, { useState } from 'react'
+// Lobby.js
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCodeTitles } from '../axios';
+import '../Styles/Lobby.css';
 
 const Lobby = () => {
     const [titles, setTitles] = useState([]);
+
     useState(() => {
         const fetchData = async () => {
             const data = await getCodeTitles();
-            setTitles(data)
-        }
+            setTitles(data);
+        };
         fetchData();
-    }, [])
+    }, []);
+
     return (
-        <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
+        <div className="container">
             <h1>Choose code block</h1>
             <ul>
                 {titles.map((block) => (
@@ -22,7 +26,7 @@ const Lobby = () => {
                 ))}
             </ul>
         </div>
-    )
-}
+    );
+};
 
-export default Lobby
+export default Lobby;

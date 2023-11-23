@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Lobby from "./pages/Lobby";
 import Code from "./pages/Code";
+import './App.css';
 
 
 const App = () => {
