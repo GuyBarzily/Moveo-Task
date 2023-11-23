@@ -12,7 +12,7 @@ const Lobby = () => {
         fetchData();
     }, [])
     return (
-        <div>
+        <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
             <h1>Choose code block</h1>
             <ul>
                 {titles.map((block) => (

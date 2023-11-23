@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "https://moveo-server-z2xn.onrender.com"
-export const getCodeTitles = async (letters) => {
+export const getCodeTitles = async () => {
     try {
         const response = await axios.get(`${BASE_URL}/codes/get-titles`);
         return response.data;
