@@ -58,8 +58,8 @@ io.on('connection', (socket) => {
         console.log(`User joined room: ${roomId}`);
 
         if (!mentorSocket) {
+            // if mentorSocket is null then no one is listening yet
             mentorSocket = socket;
-            // Send a message to the mentor indicating their mentor status
             mentorSocket.emit('mentorStatus', true);
         }
     });

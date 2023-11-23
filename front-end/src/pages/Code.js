@@ -5,9 +5,13 @@ import '../Styles/Code.css';
 import { getCodeByTitle } from '../axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSmile, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import hljs from "highlight.js";
+import CodeHighlighter from '../components/CodeHighlighter';
+// import AceEditor from "react-ace";
 
-// import "highlight.js/styles/github.css";
+// import "ace-builds/src-noconflict/mode-javascript";
+// import "ace-builds/src-noconflict/theme-github";
+// import "ace-builds/src-noconflict/ext-language_tools";
+
 
 
 const Code = () => {
@@ -19,11 +23,7 @@ const Code = () => {
     const textareaRef = useRef(null);
     const [codeData, setCodeData] = useState(null)
     const [success, setSuccess] = useState(false);
-
-    useEffect(() => {
-        console.log("useEffect")
-        hljs.highlightElement(textareaRef.current);
-    }, []);
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -39,6 +39,7 @@ const Code = () => {
         const fetchData = async () => {
             const data = await getCodeByTitle(id);
             setCodeData(data[0]);
+            setCode(data[0].code);
         }
         fetchData();
         if (socket) {
@@ -68,8 +69,7 @@ const Code = () => {
     };
 
     const checkSuccess = (newCode) => {
-
-        if (codeData && newCode === codeData.code) {
+        if (codeData && newCode.replace(/\s/g, '') === codeData.solution.replace(/\s/g, '')) {
             setSuccess(true);
         }
         else {
@@ -87,22 +87,25 @@ const Code = () => {
             } */}
             <h1>Code block details</h1>
             <h2> {id}</h2>
-            {/* <pre>
-                <code className="language-typescript">const data = { }</code>
-            </pre> */}
-            <div className="code-block-container">
-                <textarea
-                    ref={textareaRef}
-                    className={`code-block ${isMentor ? 'read-only' : ''}`}
-                    placeholder="Write your code here..."
-                    value={code}
-                    onChange={handleCodeChange}
-                    rows={20}
-                    cols={50}
-                    readOnly={isMentor}
-                    spellCheck={false}
-                />
-            </div>
+            {loading ? (
+                <div className="loader"></div>
+            ) : (
+                <div >
+                    <textarea
+                        ref={textareaRef}
+                        className={`code-block ${isMentor ? 'read-only' : ''}`}
+                        placeholder="Write your code here..."
+                        value={code}
+                        onChange={handleCodeChange}
+                        rows={20}
+                        cols={50}
+                        readOnly={isMentor}
+                        spellCheck={false}
+                    />
+                    <CodeHighlighter code={code} />
+                </div>
+            )}
+
 
             {success &&
                 <>

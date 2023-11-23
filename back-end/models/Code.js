@@ -10,6 +10,10 @@ const codeSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    solution: {
+        type: String,
+        required: true,
+    }
 });
 
 const Code = mongoose.model('Code', codeSchema);

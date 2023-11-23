@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Code = require('../models/Code');
 
-
 /**
  * @swagger
  * /codes/get-titles:
@@ -18,12 +17,10 @@ const Code = require('../models/Code');
  */
 router.get('/codes/get-titles', async (req, res) => {
     try {
-        // Assuming Code is a Mongoose model representing your codes
-        const codeNames = await Code.find({}, 'title');
-
-        res.status(200).json(codeNames);
+        const codeTitles = await Code.find({}, 'title');
+        res.status(200).json(codeTitles);
     } catch (error) {
-        console.error('Error fetching code names:', error);
+        console.error('Error fetching code titles:', error);
         res.status(500).send('Internal Server Error');
     }
 });
@@ -50,19 +47,14 @@ router.get('/codes/get-titles', async (req, res) => {
  */
 router.get('/codes/title/:title', async (req, res) => {
     try {
-        const { title } = req.params; // Corrected the variable name to title
-        console.log(title);
-
-        // Assuming Code is a Mongoose model representing your codes
+        const { title } = req.params;
         const code = await Code.find({ title });
-
         res.status(200).json(code);
     } catch (error) {
         console.error('Error fetching code by title:', error);
         res.status(500).send('Internal Server Error');
     }
 });
-
 
 /**
  * @swagger
@@ -81,6 +73,12 @@ router.get('/codes/title/:title', async (req, res) => {
  *                 type: string
  *               code:
  *                 type: string
+ *               solution:
+ *                 type: string
+ *             required:
+ *               - title
+ *               - code
+ *               - solution
  *     responses:
  *       '201':
  *         description: Code created successfully
@@ -90,10 +88,10 @@ router.get('/codes/title/:title', async (req, res) => {
  *         description: Internal server error
  */
 router.post('/codes', async (req, res) => {
-    const { title, code } = req.body;
+    const { title, code, solution } = req.body;
 
     try {
-        const newCode = new Code({ title, code });
+        const newCode = new Code({ title, code, solution });
         const savedCode = await newCode.save();
 
         res.status(201).json(savedCode);
