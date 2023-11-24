@@ -18,7 +18,6 @@ code blocks solutions:
 }
 5. Async Function : //create an async arrow function A and wait for get data
 import getData from "./axios"
-
-const A = async () =>{
-  await getData();
-  }
+   const A = async () =>{
+        await getData();
+     }
