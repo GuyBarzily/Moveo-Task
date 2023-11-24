@@ -3,12 +3,13 @@
 }
 
 .code-block {
-    background-color: black;
-    color: white;
     font-family: 'Courier New', Courier;
     font-size: larger;
     border: 1px solid white;
     padding: 10px;
+    background-color: white;
+    min-width: '40vw';
+    min-height: '60vh';
 }
 
 .code-block.read-only {
