@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import '../Styles/Code.css';
@@ -16,6 +16,7 @@ import 'prismjs/themes/prism.css'; //Example style, you can use another
 
 
 const Code = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [code, setCode] = useState('');
     const [socket, setSocket] = useState(null);
@@ -62,6 +63,10 @@ const Code = () => {
         }
     }, [id, socket, isMentor]);
 
+    useEffect(() => {
+
+    }, [isMentor])
+
     const handleCodeChange = (newCode) => {
         setCode(newCode);
         checkSuccess(newCode);
@@ -76,18 +81,27 @@ const Code = () => {
             setSuccess(false)
         }
     }
-    useEffect(() => {
 
-    }, [isMentor])
+    const goBack = () => {
+        navigate(-1);
+    }
+
 
     return (
-        <div className="code-div">
-            <h1>Code block details</h1>
-            <h2> {id}</h2>
-            {loading ? (
-                <div className="loader"></div>
-            ) : (
-                <div >
+        <div>
+            <FontAwesomeIcon
+                icon={faArrowLeft}
+                size='3x'
+                color='orange'
+                style={{ marginLeft: '20px', marginTop: '10px' }}
+                onClick={goBack}
+                cursor='pointer'
+            />
+            <div className='code-div'>
+                <h2> {id}</h2>
+                {loading ? (
+                    <div className="loader"></div>
+                ) : (
                     <Editor
                         value={code}
                         onValueChange={handleCodeChange}
@@ -102,13 +116,10 @@ const Code = () => {
                             fontSize: 20,
                             border: '1px solid #ddd',
                             cursor: isMentor ? 'default' : 'text',
-
-
                         }}
                     />
-
-                </div>
-            )}
+                )}
+            </div>
             {success &&
                 <>
                     <FontAwesomeIcon icon={faFaceSmile} size='10x' color='orange' style={{ marginTop: '20px' }} />
