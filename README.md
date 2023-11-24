@@ -3,7 +3,7 @@ Hi, This is my home assignment for Moveo Group.
 code blocks solutions:
 
 1. Sort Array : function sort(arr){
-   return arr.sort()
+   return arr.sort();
 }
 2. Rotate Array : function rotateArray(arr,k){
   const rotateIndex = k % arr.length;
