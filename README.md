@@ -16,3 +16,9 @@ code blocks solutions:
 4. Find if even : function isEven(num){
   return num % 2 === 0;
 }
+5. Async Function : //create an async arrow function A and wait for get data
+import getData from "./axios"
+
+const A = async () =>{
+  await getData();
+  }
