@@ -3,7 +3,7 @@ Hi, This is my home assignment for Moveo Group.
 code blocks solutions:
 
 1. Sort Array : function sort(arr){
-   return arr.sort()
+   return arr.sort();
 }
 2. Rotate Array : function rotateArray(arr,k){
   const rotateIndex = k % arr.length;
@@ -16,3 +16,8 @@ code blocks solutions:
 4. Find if even : function isEven(num){
   return num % 2 === 0;
 }
+5. Async Function : //create an async arrow function A and wait for get data
+import getData from "./axios"
+   const A = async () =>{
+        await getData();
+     }
