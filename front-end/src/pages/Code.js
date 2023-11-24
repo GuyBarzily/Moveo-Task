@@ -119,13 +119,14 @@ const Code = () => {
                         }}
                     />
                 )}
+
+                {success &&
+                    <>
+                        <FontAwesomeIcon icon={faFaceSmile} size='10x' color='orange' style={{ marginTop: '20px' }} />
+                        <h1>Very Good!</h1>
+                    </>
+                }
             </div>
-            {success &&
-                <>
-                    <FontAwesomeIcon icon={faFaceSmile} size='10x' color='orange' style={{ marginTop: '20px' }} />
-                    <h1>Very Good!</h1>
-                </>
-            }
         </div>
     );
 }
