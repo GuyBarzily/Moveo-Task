@@ -18,7 +18,7 @@ code blocks solutions:
 3. Print Array : function printArray(arr){
   console.log(arr);
 }
-4. Find if even : function isEven(num){
+4. Find If Even : function isEven(num){
   return num % 2 === 0;
 }
 5. Async Function : //create an async arrow function A and wait for get data
