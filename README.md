@@ -1,7 +1,5 @@
-Hi, This is my home assignment for Moveo Group.
-
+An Online Coding Web Application
 code blocks solutions:
-
 1. Sort Array : function sort(arr){
    return arr.sort();
 }
@@ -21,3 +19,6 @@ import getData from "./axios"
    const A = async () =>{
         await getData();
      }
+
+   
+![image](https://github.com/GuyBarzily/Moveo-Task/assets/85988766/0fdc129a-8097-46a7-aff7-23d916955af8)
