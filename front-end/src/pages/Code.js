@@ -130,8 +130,8 @@ const Code = () => {
                         insertSpaces={true}
                         style={{
                             backgroundColor: 'white',
-                            height: '50vh',
-                            width: '550px',
+                            minHeight: '50vh',
+                            minWidth: '50vw',
                             fontFamily: 'monospace',
                             fontSize: 20,
                             border: '1px solid #ddd',
