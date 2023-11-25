@@ -1,4 +1,6 @@
 An Online Coding Web Application
+
+
 code blocks solutions:
 1. Sort Array : function sort(arr){
    return arr.sort();
