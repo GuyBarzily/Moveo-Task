@@ -17,7 +17,7 @@ import 'prismjs/themes/prism.css'; //Example style, you can use another
 
 const Code = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { title } = useParams();
     const [code, setCode] = useState('');
     const [socket, setSocket] = useState(null);
     const [isMentor, setIsMentor] = useState(false);
@@ -40,7 +40,7 @@ const Code = () => {
         // use Effect to fetch code details from server
         const fetchData = async () => {
             try {
-                const data = await getCodeByTitle(id);
+                const data = await getCodeByTitle(title);
                 setCodeData(data[0]);
                 setCode(data[0].code);
             } catch (e) {
@@ -51,7 +51,7 @@ const Code = () => {
         }
         fetchData();
         if (socket) {
-            socket.emit('joinRoom', id);
+            socket.emit('joinRoom', title);
 
             socket.on('codeChange', (newCode) => {
                 if (isMentor) {
@@ -63,7 +63,7 @@ const Code = () => {
                 setIsMentor(status);
             });
         }
-    }, [id, socket, isMentor]);
+    }, [title, socket, isMentor]);
 
     useEffect(() => {
 
@@ -73,7 +73,7 @@ const Code = () => {
         // setting the code to the new code and sending in to the socket
         setCode(newCode);
         checkSuccess(newCode);
-        socket.emit('codeChange', { roomId: id, code: newCode });
+        socket.emit('codeChange', { roomId: title, code: newCode });
     };
 
     const checkSuccess = (newCode) => {
@@ -102,7 +102,7 @@ const Code = () => {
                 cursor='pointer'
             />
             <div className='code-div'>
-                <h2> {id}</h2>
+                <h2> {title}</h2>
                 {loading ? (
                     <div className="loader"></div>
                 ) : (
@@ -112,6 +112,7 @@ const Code = () => {
                         highlight={code => highlight(code, languages.js)}
                         padding={10}
                         readOnly={isMentor}
+                        insertSpaces={true}
                         style={{
                             backgroundColor: 'white',
                             minHeight: '50vh',
