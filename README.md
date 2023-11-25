@@ -1,6 +1,6 @@
 An Online Coding Web Application
 
-The app was created with React.js on the client side and Node.js on the server side and MondoDB as the databsae.
+The app was created with React.js on the client side and Node.js on the server side and MongoDB as the databsae.
 
 
 The client side was deployed on Firebase using firebase hosting and the server was deployed using Render.
