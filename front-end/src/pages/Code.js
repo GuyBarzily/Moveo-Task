@@ -131,7 +131,7 @@ const Code = () => {
                         style={{
                             backgroundColor: 'white',
                             height: '50vh',
-                            widows: '40vw',
+                            width: '550px',
                             fontFamily: 'monospace',
                             fontSize: 20,
                             border: '1px solid #ddd',
