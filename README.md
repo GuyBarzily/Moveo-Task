@@ -1,5 +1,8 @@
 An Online Coding Web Application
 
+The app was created with React.js on the client side and Node.js on the server side. 
+The client side was deployed on Firebase using firebase hosting and the server was deployed using Render.
+
 
 code blocks solutions:
 1. Sort Array : function sort(arr){
