@@ -22,7 +22,7 @@ import getData from "./axios"
         await getData();
      }
 
-![image](https://github.com/GuyBarzily/Moveo-Task/assets/85988766/76797210-873c-494c-9dfd-ed56cb568448)
+![image](https://github.com/GuyBarzily/Moveo-Task/assets/85988766/caac3405-6426-4e76-8b22-fb44a3572642)
 
 
    
