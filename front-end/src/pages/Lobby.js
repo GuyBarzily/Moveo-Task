@@ -8,6 +8,7 @@ const Lobby = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        // use Effect to get the titles from the server
         const fetchData = async () => {
             try {
                 const data = await getCodeTitles();

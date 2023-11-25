@@ -27,6 +27,7 @@ const Code = () => {
 
 
     useEffect(() => {
+        // use Effect to initialize the socket with the server
         const newSocket = io('https://moveo-server-z2xn.onrender.com');
         setSocket(newSocket);
 
@@ -36,6 +37,7 @@ const Code = () => {
     }, []);
 
     useEffect(() => {
+        // use Effect to fetch code details from server
         const fetchData = async () => {
             try {
                 const data = await getCodeByTitle(id);
@@ -68,12 +70,14 @@ const Code = () => {
     }, [isMentor])
 
     const handleCodeChange = (newCode) => {
+        // setting the code to the new code and sending in to the socket
         setCode(newCode);
         checkSuccess(newCode);
         socket.emit('codeChange', { roomId: id, code: newCode });
     };
 
     const checkSuccess = (newCode) => {
+        // removeing all spaces and tabs from the code string to compare the solution to the current code
         if (codeData && newCode.replace(/\s/g, '') === codeData.solution.replace(/\s/g, '')) {
             setSuccess(true);
         }
