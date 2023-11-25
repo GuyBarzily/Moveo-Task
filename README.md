@@ -1,5 +1,10 @@
 An Online Coding Web Application
 
+The app was created with React.js on the client side, Node.js on the server side and MongoDB as the databsae.
+
+
+The client side was deployed on Firebase using firebase hosting and the server was deployed using Render.
+
 
 code blocks solutions:
 1. Sort Array : function sort(arr){
@@ -22,7 +27,7 @@ import getData from "./axios"
         await getData();
      }
 
-![image](https://github.com/GuyBarzily/Moveo-Task/assets/85988766/76797210-873c-494c-9dfd-ed56cb568448)
+![image](https://github.com/GuyBarzily/Moveo-Task/assets/85988766/caac3405-6426-4e76-8b22-fb44a3572642)
 
 
    
