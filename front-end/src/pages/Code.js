@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import '../Styles/Code.css';
 import { getCodeByTitle } from '../axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFaceSmile, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faFaceSmile, faArrowLeft, faRefresh } from '@fortawesome/free-solid-svg-icons';
 
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs';
@@ -27,7 +27,7 @@ const Code = () => {
 
 
     useEffect(() => {
-        // use Effect to initialize the socket with the server
+        // initialize the socket with the server
         const newSocket = io('https://moveo-server-z2xn.onrender.com');
         setSocket(newSocket);
 
@@ -37,19 +37,7 @@ const Code = () => {
     }, []);
 
     useEffect(() => {
-        // use Effect to fetch code details from server
-        const fetchData = async () => {
-            try {
-                const data = await getCodeByTitle(title);
-                setCodeData(data[0]);
-                setCode(data[0].code);
-            } catch (e) {
-                console.log(e);
-            } finally {
-                setLoading(false)
-            }
-        }
-        fetchData();
+        // joins the room with the title
         if (socket) {
             socket.emit('joinRoom', title);
 
@@ -66,8 +54,20 @@ const Code = () => {
     }, [title, socket, isMentor]);
 
     useEffect(() => {
-
-    }, [isMentor])
+        // fetch code details from server
+        const fetchData = async () => {
+            try {
+                const data = await getCodeByTitle(title);
+                setCodeData(data[0]);
+                setCode(data[0].code);
+            } catch (e) {
+                console.log(e);
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchData();
+    }, [title])
 
     const handleCodeChange = (newCode) => {
         // setting the code to the new code and sending in to the socket
@@ -90,19 +90,34 @@ const Code = () => {
         navigate(-1);
     }
 
+    const refreshCode = () => {
+        setCode(codeData.code)
+        setSuccess(false);
+        socket.emit('codeChange', { roomId: title, code: codeData.code });
+    }
+
 
     return (
         <div>
             <FontAwesomeIcon
                 icon={faArrowLeft}
                 size='3x'
-                color='orange'
                 style={{ marginLeft: '20px', marginTop: '10px' }}
                 onClick={goBack}
                 cursor='pointer'
             />
             <div className='code-div'>
-                <h2> {title}</h2>
+                <div className='code-title-div'>
+
+                    <h2> {title}</h2>
+                    <FontAwesomeIcon
+                        icon={faRefresh}
+                        size='lg'
+                        cursor='pointer'
+                        onClick={!isMentor ? refreshCode : () => { }}
+
+                    />
+                </div>
                 {loading ? (
                     <div className="loader"></div>
                 ) : (
@@ -115,12 +130,11 @@ const Code = () => {
                         insertSpaces={true}
                         style={{
                             backgroundColor: 'white',
-                            minHeight: '50vh',
-                            minWidth: '40vw',
+                            height: '50vh',
+                            widows: '40vw',
                             fontFamily: 'monospace',
                             fontSize: 20,
                             border: '1px solid #ddd',
-                            cursor: isMentor ? 'default' : 'text',
                         }}
                     />
                 )}
