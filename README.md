@@ -3,7 +3,7 @@ An Online Coding Web Application
 The app was created with React.js on the client side, Node.js on the server side and MongoDB as the databsae.
 
 
-The client side was deployed on Firebase using firebase hosting and the server was deployed using Render.
+The client side was deployed on Firebase using firebase hosting and the server was deployed using Railway.
 
 
 code blocks solutions:
@@ -31,4 +31,4 @@ import getData from "./axios"
 
 
    
-![image](https://github.com/GuyBarzily/Moveo-Task/assets/85988766/0fdc129a-8097-46a7-aff7-23d916955af8)
+<img width="1205" alt="image" src="https://github.com/GuyBarzily/Moveo-Task/assets/85988766/252192af-7fab-4682-a474-c37f30650701">
