@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://moveo-server-z2xn.onrender.com"
+// const BASE_URL = "https://moveo-server-z2xn.onrender.com"
+const BASE_URL = "https://moveo-task-production.up.railway.app"
 export const getCodeTitles = async () => {
     try {
         const response = await axios.get(`${BASE_URL}/codes/get-titles`);
