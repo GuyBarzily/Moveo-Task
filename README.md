@@ -3,7 +3,7 @@ An Online Coding Web Application
 The app was created with React.js on the client side, Node.js on the server side and MongoDB as the databsae.
 
 
-The client side was deployed on Firebase using firebase hosting and the server was deployed using Render.
+The client side was deployed on Firebase using firebase hosting and the server was deployed using Railway.
 
 
 code blocks solutions:
